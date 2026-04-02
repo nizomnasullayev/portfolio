@@ -1,0 +1,329 @@
+/* ─────────────────────────────────────────────
+   CSS Custom Properties — Dark (default)
+───────────────────────────────────────────── */
+:root {
+  --bg-0: #060d06;
+  --bg-1: #0b130b;
+  --bg-2: #111911;
+  --bg-card: #131f13;
+  --bg-card-hover: #172317;
+
+  --green-bright: #4ade80;
+  --green-mid: #22c55e;
+  --green-dim: #16a34a;
+  --green-deep: #166534;
+  --green-glow: rgba(74, 222, 128, 0.18);
+  --green-glow-sm: rgba(74, 222, 128, 0.08);
+
+  --text-primary: #f0fdf4;
+  --text-secondary: #bbf7d0;
+  --text-muted: #4b7055;
+  --text-faint: #2d4a35;
+
+  --border: rgba(74, 222, 128, 0.12);
+  --border-hover: rgba(74, 222, 128, 0.3);
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 32px rgba(74, 222, 128, 0.15);
+
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  --nav-height: 70px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─────────────────────────────────────────────
+   Light Mode
+───────────────────────────────────────────── */
+.light {
+  --bg-0: #f0fdf4;
+  --bg-1: #dcfce7;
+  --bg-2: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0fdf4;
+
+  --green-bright: #16a34a;
+  --green-mid: #15803d;
+  --green-dim: #14532d;
+  --green-deep: #052e16;
+  --green-glow: rgba(22, 163, 74, 0.12);
+  --green-glow-sm: rgba(22, 163, 74, 0.06);
+
+  --text-primary: #052e16;
+  --text-secondary: #14532d;
+  --text-muted: #4b7055;
+  --text-faint: #bbf7d0;
+
+  --border: rgba(22, 163, 74, 0.14);
+  --border-hover: rgba(22, 163, 74, 0.35);
+
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 32px rgba(22, 163, 74, 0.1);
+}
+
+/* ─────────────────────────────────────────────
+   Reset & Base
+───────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-0);
+  color: var(--text-primary);
+  line-height: 1.65;
+  font-size: 16px;
+  transition: background-color var(--transition), color var(--transition);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ─────────────────────────────────────────────
+   Scrollbar
+───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-0); }
+::-webkit-scrollbar-thumb { background: var(--green-deep); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--green-mid); }
+
+/* ─────────────────────────────────────────────
+   Selection
+───────────────────────────────────────────── */
+::selection {
+  background: var(--green-mid);
+  color: var(--bg-0);
+}
+
+/* ─────────────────────────────────────────────
+   Utility Classes
+───────────────────────────────────────────── */
+.section {
+  padding: 96px 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green-bright);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.15;
+}
+
+.section-title span {
+  color: var(--green-bright);
+}
+
+/* ─────────────────────────────────────────────
+   Hover.css overrides — sweep-to-right on btns
+───────────────────────────────────────────── */
+.hvr-sweep-to-right {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color var(--transition) !important;
+}
+.hvr-sweep-to-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--green-bright);
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+.hvr-sweep-to-right:hover::before {
+  transform: scaleX(1);
+}
+.hvr-sweep-to-right:hover {
+  color: var(--bg-0) !important;
+}
+
+/* ─────────────────────────────────────────────
+   Tag pill
+───────────────────────────────────────────── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  background: var(--green-glow-sm);
+  border: 1px solid var(--border);
+  color: var(--green-bright);
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────────
+   Glowing ring helper
+───────────────────────────────────────────── */
+.glow-ring {
+  position: relative;
+  border-radius: 50%;
+}
+.glow-ring::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(var(--green-bright), transparent, var(--green-mid), transparent, var(--green-bright));
+  z-index: -1;
+  animation: spin 6s linear infinite;
+}
+.spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 1s linear infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.spinner svg {
+  display: block;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─────────────────────────────────────────────
+   Progress bar
+───────────────────────────────────────────── */
+.progress-track {
+  height: 6px;
+  background: var(--border);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--green-dim), var(--green-bright));
+  transform-origin: left;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─────────────────────────────────────────────
+   Page fade-in
+───────────────────────────────────────────── */
+.page-enter {
+  animation: pageFade 0.5s ease forwards;
+}
+@keyframes pageFade {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────────
+   Responsive helpers
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section { padding: 72px 0; }
+}
+
+/* ─────────────────────────────────────────────
+   Admin / Form base
+───────────────────────────────────────────── */
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+.form-input:focus {
+  border-color: var(--green-mid);
+  box-shadow: 0 0 0 3px var(--green-glow-sm);
+}
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+textarea.form-input {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 26px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--green-mid);
+  color: var(--bg-0);
+  border-color: var(--green-mid);
+}
+.btn-primary:hover {
+  background: var(--green-bright);
+  border-color: var(--green-bright);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--green-bright);
+  border-color: var(--border-hover);
+}
+.btn-outline:hover {
+  background: var(--green-glow-sm);
+}
+.btn-danger {
+  background: transparent;
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.3);
+}
+.btn-danger:hover {
+  background: rgba(248, 113, 113, 0.08);
+}

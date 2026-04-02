@@ -39,7 +39,19 @@ export default function Navbar() {
     const handleLink = (href: string) => {
         setOpen(false)
         const id = href.replace('#', '')
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+        const el = document.getElementById(id)
+        if (!el) return
+        const nav = document.querySelector('.navbar') as HTMLElement | null
+        const navHeight = nav?.offsetHeight ?? 70
+        const top = el.getBoundingClientRect().top + window.pageYOffset - navHeight + 1
+        if (window.history && window.history.pushState) {
+            window.history.pushState(null, '', href)
+        } else {
+            window.location.hash = href
+        }
+        window.requestAnimationFrame(() => {
+            window.scrollTo({ top, behavior: 'smooth' })
+        })
     }
 
     return (
@@ -190,9 +202,16 @@ export default function Navbar() {
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
                         style={{
+                            position: 'fixed',
+                            top: 'var(--nav-height)',
+                            left: 0,
+                            right: 0,
+                            zIndex: 99,
                             overflow: 'hidden',
                             background: 'var(--bg-1)',
                             borderBottom: '1px solid var(--border)',
+                            maxHeight: 'calc(100vh - var(--nav-height))',
+                            overflowY: 'auto',
                         }}
                     >
                         <div style={{ padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
